@@ -1,7 +1,7 @@
 Vue.createApp({
     data() {
         return {
-            dni: "",
+            email: "",
             firstName: "",
             lastName: "",
             outPut: "",
@@ -26,14 +26,14 @@ Vue.createApp({
         },
         // handler for when user clicks add client
         addClient() {
-            if (this.dni.length > 1 && this.firstName.length > 1 && this.lastName.length > 1) {
-                this.postClient(this.dni, this.firstName, this.lastName);
+            if (this.email.length > 1 && this.firstName.length > 1 && this.lastName.length > 1) {
+                this.postClient(this.email, this.firstName, this.lastName);
             }
         },
         // code to post a new client using AJAX
         // on success, reload and display the updated data from the server
-        postClient(dni, firstName, lastName) {
-            axios.post("/clients", { "dni": dni, "firstName": firstName, "lastName": lastName })
+        postClient(email, firstName, lastName) {
+            axios.post("/clients", { "email": email, "firstName": firstName, "lastName": lastName })
                 .then((response) => {
                     // handle success
                     this.loadData();
@@ -47,7 +47,7 @@ Vue.createApp({
         clearData() {
             this.firstName = "";
             this.lastName = "";
-            this.dni = "";
+            this.email = "";
         }
     }
 }).mount("#app");

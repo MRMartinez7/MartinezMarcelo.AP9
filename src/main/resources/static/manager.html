@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -9,9 +9,6 @@
 </head>
 
 <body>
-
-//cambie Email por dni para que me tome e imprima como debe
-
     <style>
         [v-cloak] {
             display: none;
@@ -31,8 +28,8 @@
                         <input type="text" v-model="lastName" class="form-control" id="lastname" required>
                     </div>
                     <div class="mb-3">
-                        <label for="dni" class="form-label">dni:</label>
-                        <input type="dni" v-model="dni" class="form-control" id="dni" required>
+                        <label for="email" class="form-label">Email address:</label>
+                        <input type="email" v-model="email" class="form-control" id="email" required>
                     </div>
                     <button type="submit" class="btn btn-success" id="add_client" v-on:click="addClient">Add
                         client</button>
@@ -44,14 +41,14 @@
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>dni</th>
+                                <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="client in clients">
                                 <td>{{ client.firstName }}</td>
                                 <td>{{ client.lastName }}</td>
-                                <td>{{ client.dni }}</td>
+                                <td>{{ client.email }}</td>
                             </tr>
                         </tbody>
                     </table>
