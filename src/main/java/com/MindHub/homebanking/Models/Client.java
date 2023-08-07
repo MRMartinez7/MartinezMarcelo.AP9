@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
@@ -16,7 +17,7 @@ public class Client {
     private  String lastName;
     private String email;
     @OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
-    Set<Account> accounts = new HashSet<>();
+    private Set<Account> accounts = new HashSet<>();
 
 
     public void addAccount(Account account) {

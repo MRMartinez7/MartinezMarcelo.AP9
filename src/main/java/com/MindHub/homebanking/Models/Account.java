@@ -1,5 +1,6 @@
 package com.MindHub.homebanking.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
