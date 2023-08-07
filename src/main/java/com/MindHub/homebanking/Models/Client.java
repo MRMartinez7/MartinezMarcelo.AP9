@@ -2,30 +2,47 @@ package com.MindHub.homebanking.Models;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
-    private String email;
     private String firstName;
-    private String lastName;
+    private  String lastName;
+    private String email;
+    @OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
+    Set<Account> accounts = new HashSet<>();
+
+
+    public void addAccount(Account account) {
+        account.setOwner(this);
+        accounts.add(account);
+    }
+
+    //Constructor
 
     public Client() {
     }
 
-    public long getId() {
-        return id;
+    public Client(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+//Getters
+
+
+    public Set<Account> getAccounts() {
+        return accounts;
     }
 
-    public String getEmail() {
-        return email;
+    public long getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -36,15 +53,21 @@ public class Client {
         return lastName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getEmail() {
+        return email;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    //Setters
+
+    public void setFirstName(String firsName) {
+        this.firstName = firsName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
