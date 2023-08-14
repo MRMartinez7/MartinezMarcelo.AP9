@@ -24,6 +24,8 @@ public class Client {
         account.setOwner(this);
         accounts.add(account);
     }
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
+    private Set<ClientLoan> clientLoans = new HashSet<>();
 
     //Constructor
 
@@ -35,12 +37,8 @@ public class Client {
         this.lastName = lastName;
         this.email = email;
     }
-//Getters
 
-
-    public Set<Account> getAccounts() {
-        return accounts;
-    }
+    //Getters
 
     public long getId() {
         return id;
@@ -58,10 +56,20 @@ public class Client {
         return email;
     }
 
-    //Setters
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
 
-    public void setFirstName(String firsName) {
-        this.firstName = firsName;
+    public Set<ClientLoan> getLoans() {
+        return clientLoans;
+    }
+
+
+//Setters
+
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
@@ -70,5 +78,13 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public void setClientLoans(Set<ClientLoan> clientLoans) {
+        this.clientLoans = clientLoans;
     }
 }
