@@ -18,10 +18,10 @@ public class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository){
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return (args) ->{
-			Client client = new Client("Melba","Morel","Melba@mindhub.com");
-			clientRepository.save(client);
+			Client client1 = new Client("Melba","Morel","Melba@mindhub.com");
+			clientRepository.save(client1);
 			Client client2 = new Client("Marcelo","Martinez","Marcelo@mindhub.com");
 			clientRepository.save(client2);
 
@@ -33,10 +33,10 @@ public class HomebankingApplication {
 			accountRepository.save(account3);
 
 
-			client.addAccount(account1);
+			client1.addAccount(account1);
 			accountRepository.save(account1);
 
-			client.addAccount(account);
+			client1.addAccount(account);
 			accountRepository.save(account);
 			client2.addAccount(account3);
 			accountRepository.save(account3);
@@ -63,16 +63,33 @@ public class HomebankingApplication {
 			Loan loan3 = new Loan("Automotriz",300000,List.of(6,12,24,36));
 			loanRepository.save(loan3);
 
-			ClientLoan clientLoan1 = new ClientLoan(400000,60,client,loan1);
+			ClientLoan clientLoan1 = new ClientLoan(400000,60,client1,loan1);
 			clientLoanRepository.save(clientLoan1);
-			ClientLoan clientLoan2 = new ClientLoan(50000,12,client,loan2);
+			ClientLoan clientLoan2 = new ClientLoan(50000,12,client1,loan2);
 			clientLoanRepository.save(clientLoan2);
 
 			ClientLoan clientLoan3 = new ClientLoan(100000,24,client2,loan2);
 			clientLoanRepository.save(clientLoan3);
 			ClientLoan clientLoan4 = new ClientLoan(200000,36,client2,loan3);
-			clientLoanRepository.save(clientLoan4
-			);
+			clientLoanRepository.save(clientLoan4);
+
+
+			Card card1 = new Card(client1.getFirstName() +" "+ client1.getLastName(),CardType.DEBIT, CardColor.GOLD, "1234-4321-1234-4321",123,LocalDate.now().plusYears(5),LocalDate.now());
+			client1.addCard(card1);
+			cardRepository.save(card1);
+			Card card2 = new Card(client1.getFirstName() +" "+ client1.getLastName(),CardType.CREDIT, CardColor.TITANIUM, "0000-1111-2222-3333",321,LocalDate.now().plusYears(5),LocalDate.now());
+			client1.addCard(card2);
+			cardRepository.save(card2);
+
+			Card card3 = new Card(client2.getFirstName() +" "+ client2.getLastName(),CardType.CREDIT, CardColor.SILVER, "4444-1111-2222-3333",777,LocalDate.now().plusYears(5),LocalDate.now());
+			client2.addCard(card3);
+			cardRepository.save(card3);
+
+
+
+
+
+
 
 		};
 
