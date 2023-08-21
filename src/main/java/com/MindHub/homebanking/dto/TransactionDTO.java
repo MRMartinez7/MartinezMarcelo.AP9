@@ -1,7 +1,7 @@
 package com.MindHub.homebanking.dto;
 
-import com.MindHub.homebanking.Models.Transaction;
-import com.MindHub.homebanking.Models.TransactionType;
+import com.MindHub.homebanking.models.Transaction;
+import com.MindHub.homebanking.models.TransactionType;
 
 import java.time.LocalDate;
 

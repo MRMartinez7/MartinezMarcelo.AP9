@@ -1,10 +1,8 @@
-package com.MindHub.homebanking.Controller;
+package com.MindHub.homebanking.controllers;
 
-import com.MindHub.homebanking.Models.Card;
-import com.MindHub.homebanking.Models.Client;
-import com.MindHub.homebanking.Repository.CardRepository;
+
 import com.MindHub.homebanking.dto.CardDTO;
-import com.MindHub.homebanking.dto.ClientDTO;
+import com.MindHub.homebanking.repositories.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,13 +20,10 @@ public class CardController {
 
     @GetMapping("/cards")
     public List<CardDTO> getCards(){
-        List<Card> allCards = cardRepository.findAll();
-        List<CardDTO> convertedListCards = allCards.stream().map(currentCard -> new CardDTO(currentCard)).collect(Collectors.toList());
-        return convertedListCards;
+        return cardRepository.findAll().stream().map(CardDTO::new).collect(Collectors.toList());
     }
     @GetMapping("/cards/{id}")
-    public CardDTO getCardById(@PathVariable long id){
-        Optional<Card> card = cardRepository.findById(id);
-        return new CardDTO(card.get());
+    public CardDTO getCardsById(@PathVariable Long id){
+        return new CardDTO(cardRepository.findById(id).orElse(null));
     }
 }

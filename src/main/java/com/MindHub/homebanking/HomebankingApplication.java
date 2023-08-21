@@ -1,7 +1,7 @@
 package com.MindHub.homebanking;
 
-import com.MindHub.homebanking.Models.*;
-import com.MindHub.homebanking.Repository.*;
+import com.MindHub.homebanking.models.*;
+import com.MindHub.homebanking.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @SpringBootApplication
 public class HomebankingApplication {
@@ -20,9 +19,9 @@ public class HomebankingApplication {
 	@Bean
 	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return (args) ->{
-			Client client1 = new Client("Melba","Morel","Melba@mindhub.com");
+			Client client1 = new Client("Melba","Morel","Melba@mindhub.com","1234");
 			clientRepository.save(client1);
-			Client client2 = new Client("Marcelo","Martinez","Marcelo@mindhub.com");
+			Client client2 = new Client("Marcelo","Martinez","Marcelo@mindhub.com","123456");
 			clientRepository.save(client2);
 
 			Account account = new Account("VIN001", LocalDate.now(),5000);

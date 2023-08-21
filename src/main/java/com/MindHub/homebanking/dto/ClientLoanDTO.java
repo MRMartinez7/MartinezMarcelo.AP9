@@ -1,6 +1,6 @@
 package com.MindHub.homebanking.dto;
 
-import com.MindHub.homebanking.Models.ClientLoan;
+import com.MindHub.homebanking.models.ClientLoan;
 
 
 public class ClientLoanDTO {

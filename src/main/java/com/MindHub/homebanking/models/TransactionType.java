@@ -1,4 +1,4 @@
-package com.MindHub.homebanking.Models;
+package com.MindHub.homebanking.models;
 
 public enum TransactionType {
     DEBIT,

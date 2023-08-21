@@ -1,6 +1,6 @@
 package com.MindHub.homebanking.dto;
 
-import com.MindHub.homebanking.Models.Loan;
+import com.MindHub.homebanking.models.Loan;
 
 import javax.persistence.ElementCollection;
 import java.util.List;

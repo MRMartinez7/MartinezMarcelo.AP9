@@ -1,9 +1,9 @@
-package com.MindHub.homebanking.Repository;
+package com.MindHub.homebanking.repositories;
 
-import com.MindHub.homebanking.Models.Loan;
+import com.MindHub.homebanking.models.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-public interface LoanRepository extends JpaRepository<Loan, Long> {
+public interface CardRepository extends JpaRepository<Card, Long> {
 }
