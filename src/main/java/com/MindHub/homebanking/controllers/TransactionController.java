@@ -22,7 +22,7 @@ public class TransactionController {
     public List<TransactionDTO> getTransactions(){
         return transactionRepository.findAll().stream().map(TransactionDTO::new).collect(Collectors.toList());
     }
-    @GetMapping("/transactions/{id}")
+    @RequestMapping("/transactions/{id}")
     public TransactionDTO getTransactionById(@PathVariable Long id){
         return new TransactionDTO(transactionRepository.findById(id).orElse(null));
     }

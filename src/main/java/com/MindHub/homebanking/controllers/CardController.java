@@ -22,7 +22,7 @@ public class CardController {
     public List<CardDTO> getCards(){
         return cardRepository.findAll().stream().map(CardDTO::new).collect(Collectors.toList());
     }
-    @GetMapping("/cards/{id}")
+    @RequestMapping("/cards/{id}")
     public CardDTO getCardsById(@PathVariable Long id){
         return new CardDTO(cardRepository.findById(id).orElse(null));
     }

@@ -23,7 +23,7 @@ public class ClientLoanController {
     public List<ClientLoanDTO> getLoans(){
         return clientLoanRepository.findAll().stream().map(ClientLoanDTO::new).collect(Collectors.toList());
     }
-    @GetMapping("/clientsLoans/{id}")
+    @RequestMapping("/clientsLoans/{id}")
     public ClientLoanDTO getClientLoanById(@PathVariable Long id){
         return new ClientLoanDTO(clientLoanRepository.findById(id).orElse(null));
     }

@@ -23,7 +23,7 @@ public class LoanController {
     public List<LoanDTO> getLoans(){
         return loanRepository.findAll().stream().map(LoanDTO::new).collect(Collectors.toList());
     }
-    @GetMapping("/loans/{id}")
+    @RequestMapping("/loans/{id}")
     public LoanDTO getLoanById(@PathVariable Long id){
         return new LoanDTO(loanRepository.findById(id).orElse(null));
     }
