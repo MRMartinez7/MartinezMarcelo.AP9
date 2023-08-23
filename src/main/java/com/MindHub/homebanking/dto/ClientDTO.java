@@ -1,6 +1,7 @@
 package com.MindHub.homebanking.dto;
 
 import com.MindHub.homebanking.models.Client;
+import com.MindHub.homebanking.models.RolType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ public class ClientDTO {
     private  String firstName;
     private  String lastName;
     private  String email;
+    private RolType type;
 
     public ClientDTO() {
     }
@@ -23,6 +25,7 @@ private Set<AccountDTO> accounts = new HashSet<>();
         firstName = client.getFirstName();
         lastName = client.getLastName();
         email = client.getEmail();
+        type = client.getRol();
         accounts = client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(Collectors.toSet());
         loans = client.getLoans().stream().map(loan -> new ClientLoanDTO(loan)).collect(Collectors.toSet());
         cards = client.getCards().stream().map(card -> new CardDTO(card)).collect(Collectors.toSet());
@@ -55,4 +58,9 @@ private Set<AccountDTO> accounts = new HashSet<>();
     public Set<CardDTO> getCards() {
         return cards;
     }
+
+    public RolType getType() {
+        return type;
+    }
+
 }

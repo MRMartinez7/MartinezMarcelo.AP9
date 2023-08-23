@@ -22,9 +22,9 @@ private PasswordEncoder passwordEncoder;
 	@Bean
 	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository){
 		return (args) ->{
-			Client client1 = new Client("Melba","Morel","Melba@mindhub.com",passwordEncoder.encode("1234"));
+			Client client1 = new Client("Melba","Morel","Melba@mindhub.com",passwordEncoder.encode("1234"),RolType.CLIENT);
 			clientRepository.save(client1);
-			Client client2 = new Client("Marcelo","Martinez","Marcelo@mindhub.com",passwordEncoder.encode("123456"));
+			Client client2 = new Client("Marcelo","Martinez","Marcelo@mindhub.com",passwordEncoder.encode("123456"),RolType.ADMIN);
 			clientRepository.save(client2);
 
 			Account account = new Account("VIN001", LocalDate.now(),5000);

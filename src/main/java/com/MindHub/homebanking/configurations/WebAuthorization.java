@@ -1,8 +1,10 @@
 package com.MindHub.homebanking.configurations;
 
 
+import com.MindHub.homebanking.models.Client;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -21,13 +23,16 @@ public class WebAuthorization  {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+
                 .antMatchers("/web/index.html").permitAll()
                 .antMatchers("/web/css/**", "/web/js/**", "/web/img/**").permitAll()
-                .antMatchers("/web/**").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers("/web/**","/api/accounts/{id}").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
+                .antMatchers("/admin/**","/h2-console/**","/rest/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/api/clients/current").authenticated()
+                .antMatchers("/**").denyAll()
+                ;
 
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-
-                .antMatchers("/**").hasAuthority("CLIENT");
 
 
 
