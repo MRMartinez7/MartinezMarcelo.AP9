@@ -26,4 +26,6 @@ public class CardController {
     public CardDTO getCardsById(@PathVariable Long id){
         return new CardDTO(cardRepository.findById(id).orElse(null));
     }
+
+    //
 }
