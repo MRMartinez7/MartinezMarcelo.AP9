@@ -1,10 +1,13 @@
 package com.MindHub.homebanking.controllers;
 
 
-import antlr.BaseAST;
+
+import com.MindHub.homebanking.dto.AccountDTO;
 import com.MindHub.homebanking.dto.ClientDTO;
+import com.MindHub.homebanking.models.Account;
 import com.MindHub.homebanking.models.Client;
 import com.MindHub.homebanking.models.RolType;
+import com.MindHub.homebanking.repositories.AccountRepository;
 import com.MindHub.homebanking.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,10 +40,15 @@ public class ClientController {
     public ClientDTO getCurrentClient(Authentication authentication){
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
+
+    @Autowired
+    private AccountRepository accountRepository;
     @PostMapping(path = "/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
-            @RequestParam String email, @RequestParam String password) {
+            @RequestParam String email, @RequestParam String password)
+
+    {
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
 
@@ -51,7 +60,9 @@ public class ClientController {
             return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
         }
         clientRepository.save(new Client(firstName, lastName, email, passwordEncoder.encode(password),RolType.CLIENT));
+
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
+
 }

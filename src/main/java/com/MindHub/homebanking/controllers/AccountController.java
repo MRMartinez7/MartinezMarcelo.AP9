@@ -1,6 +1,7 @@
 package com.MindHub.homebanking.controllers;
 
 import com.MindHub.homebanking.dto.AccountDTO;
+import com.MindHub.homebanking.dto.ClientDTO;
 import com.MindHub.homebanking.models.Account;
 import com.MindHub.homebanking.models.Client;
 import com.MindHub.homebanking.repositories.AccountRepository;
@@ -42,5 +43,10 @@ public class AccountController {
         }else {
             return new ResponseEntity<>("Esta Account no te pertenece",HttpStatus.NOT_FOUND);
         }
+    }
+
+    @RequestMapping ("/api/clients/current/accounts")
+    public AccountDTO getCurrentClientAccount(Authentication authentication){
+        return new AccountDTO(accountRepository.findByNumber(authentication.getName()));
     }
 }

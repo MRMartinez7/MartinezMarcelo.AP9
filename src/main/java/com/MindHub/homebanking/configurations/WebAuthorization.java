@@ -25,11 +25,13 @@ public class WebAuthorization  {
         http.authorizeRequests()
 
                 .antMatchers("/web/index.html").permitAll()
-                .antMatchers("/web/css/**", "/web/js/**", "/web/img/**").permitAll()
-                .antMatchers("/web/**","/api/accounts/{id}").authenticated()
+                .antMatchers("/api/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/logout").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers("/web/css/**", "/web/js/**", "/web/img/**").permitAll()
+                .antMatchers("/web/**","/api/accounts/{id}","/web/create-cards").authenticated()
                 .antMatchers("/admin/**","/h2-console/**","/rest/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET,"/api/clients/current").authenticated()
+                .antMatchers(HttpMethod.GET,"/api/clients/current", "/api/clients/current/accounts").authenticated()
                 .antMatchers("/**").denyAll()
                 ;
 
