@@ -24,17 +24,14 @@ public class WebAuthorization  {
 
         http.authorizeRequests()
 
-                .antMatchers("/web/index.html").permitAll()
-                .antMatchers("/web/css/**", "/web/js/**", "/web/img/**").permitAll()
-                .antMatchers("/web/**","/api/accounts/{id}").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers("/admin/**","/h2-console/**","/rest/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET,"/api/clients/current").authenticated()
-                .antMatchers("/**").denyAll()
+                .antMatchers("/web/index.html" ).permitAll()
+                .antMatchers("/web/css/**", "/web/js/**", "/web/img/**" ).permitAll()
+                .antMatchers(HttpMethod.POST, "/api/clients", "/api/accounts", "/api/clients/current/accounts", "/api/clients/current/cards" ).permitAll()
+                .antMatchers("/web/**", "/api/accounts/{id}" ).authenticated()
+                .antMatchers("/admin/**","/h2-console/**", "/rest/**" ).hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET,"/api/clients/current", "/api/clients/current/accounts", "/api/clients/current/cards" ).hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers("/**" ).denyAll()
                 ;
-
-
-
 
         http.formLogin()
 
@@ -46,7 +43,7 @@ public class WebAuthorization  {
 
 
 
-        http.logout().logoutUrl("/api/logout");
+        http.logout().logoutUrl("/api/logout").deleteCookies("JSESSIONID");
 
 
 

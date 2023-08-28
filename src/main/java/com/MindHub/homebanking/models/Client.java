@@ -121,4 +121,5 @@ public class Client {
     public void setRol(RolType rol) {
         this.rol = rol;
     }
+
 }

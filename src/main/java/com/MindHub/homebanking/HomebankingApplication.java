@@ -86,13 +86,6 @@ private PasswordEncoder passwordEncoder;
 			Card card3 = new Card(client2.getFirstName() +" "+ client2.getLastName(),CardType.CREDIT, CardColor.SILVER, "4444-1111-2222-3333",777,LocalDate.now().plusYears(5),LocalDate.now());
 			client2.addCard(card3);
 			cardRepository.save(card3);
-
-
-
-
-
-
-
 		};
 
 	}
