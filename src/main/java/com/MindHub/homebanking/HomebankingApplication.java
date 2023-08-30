@@ -43,18 +43,18 @@ private PasswordEncoder passwordEncoder;
 			client2.addAccount(account3);
 			accountRepository.save(account3);
 
-			Transaction transaction1 = new Transaction(TransactionType.CREDIT, 15000, "Venta",LocalDate.now());
+			Transaction transaction1 = new Transaction(TrasnferType.OWN,TransactionType.CREDIT, 15000, "Venta",LocalDate.now());
 			account.addTransaction(transaction1);
 			transactionRepository.save(transaction1);
 
-			Transaction transaction2 = new Transaction(TransactionType.DEBIT, 10000, "Compra",LocalDate.now());
+			Transaction transaction2 = new Transaction(TrasnferType.OWN,TransactionType.DEBIT, 10000, "Compra",LocalDate.now());
 			account.addTransaction(transaction2);
 			transactionRepository.save(transaction2);
 
-			Transaction transaction3 = new Transaction(TransactionType.CREDIT, 11000, "Venta",LocalDate.now());
+			Transaction transaction3 = new Transaction(TrasnferType.OWN,TransactionType.CREDIT, 11000, "Venta",LocalDate.now());
 			account1.addTransaction(transaction3);
 			transactionRepository.save(transaction3);
-			Transaction transaction4 = new Transaction(TransactionType.CREDIT, 21000, "Venta",LocalDate.now());
+			Transaction transaction4 = new Transaction(TrasnferType.OWN,TransactionType.CREDIT, 21000, "Venta",LocalDate.now());
 			account3.addTransaction(transaction4);
 			transactionRepository.save(transaction4);
 
