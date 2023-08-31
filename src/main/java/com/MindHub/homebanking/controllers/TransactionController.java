@@ -65,6 +65,9 @@ public class TransactionController {
         if (accountDebit.getBalance() < amount){
             return  new ResponseEntity<>("this account don't have enough amount" ,HttpStatus.FORBIDDEN);
         }
+        if (amount < 0){
+            return  new ResponseEntity<>("negative balances are not allowed", HttpStatus.FORBIDDEN);
+        }
         double originTransaction = accountDebit.getBalance()-amount;
         double destinyTransaction = accountCredit.getBalance()+amount;
         accountDebit.setBalance(originTransaction);
