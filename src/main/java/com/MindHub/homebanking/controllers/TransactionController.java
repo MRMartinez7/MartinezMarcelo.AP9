@@ -62,7 +62,7 @@ public class TransactionController {
         if (!accountRepository.existsByNumber(toAccountNumber)){
             return  new ResponseEntity<>("non-existent destination accounts", HttpStatus.FORBIDDEN);
         }
-        if (accountDebit.getBalance() <= amount){
+        if (accountDebit.getBalance() < amount){
             return  new ResponseEntity<>("this account don't have enough amount" ,HttpStatus.FORBIDDEN);
         }
         double originTransaction = accountDebit.getBalance()-amount;
