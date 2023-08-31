@@ -26,10 +26,10 @@ public class WebAuthorization  {
 
                 .antMatchers("/web/index.html" ).permitAll()
                 .antMatchers("/web/css/**", "/web/js/**", "/web/img/**" ).permitAll()
-                .antMatchers(HttpMethod.POST, "/api/clients", "/api/accounts", "/api/clients/current/accounts", "/api/clients/current/cards" ).permitAll()
+                .antMatchers(HttpMethod.POST, "/api/clients", "/api/accounts", "/api/clients/current/accounts", "/api/clients/current/cards","/api/transactions" ).permitAll()
                 .antMatchers("/web/**", "/api/accounts/{id}" ).authenticated()
                 .antMatchers("/admin/**","/h2-console/**", "/rest/**" ).hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET,"/api/clients/current", "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions" ).hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers(HttpMethod.GET,"/api/clients/current", "/api/clients/current/accounts", "/api/clients/current/cards" ).hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers("/**" ).denyAll()
                 ;
 

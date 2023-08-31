@@ -14,7 +14,7 @@ public class Transaction {
     private double amount;
     private String description;
     private LocalDate date;
-    private TrasnferType trasnferType;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
@@ -25,8 +25,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(TrasnferType trasnferType, TransactionType type, double amount, String description, LocalDate date) {
-        this.trasnferType = trasnferType;
+    public Transaction(TransactionType type, double amount, String description, LocalDate date) {
         this.type = type;
         this.amount = amount;
         this.description = description;
@@ -59,9 +58,7 @@ public class Transaction {
         return accountowner;
     }
 
-    public TrasnferType getTrasnferType() {
-        return trasnferType;
-    }
+
 //Setters
 
 
@@ -82,10 +79,5 @@ public class Transaction {
     }
 
     public void setAccountowner(Account accountowner) {
-        this.accountowner = accountowner;
+        this.accountowner = accountowner;}
     }
-
-    public void setTrasnferType(TrasnferType trasnferType) {
-        this.trasnferType = trasnferType;
-    }
-}
