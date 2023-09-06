@@ -37,7 +37,6 @@ private PasswordEncoder passwordEncoder;
 
 			client1.addAccount(account1);
 			accountRepository.save(account1);
-
 			client1.addAccount(account);
 			accountRepository.save(account);
 			client2.addAccount(account3);
@@ -65,14 +64,16 @@ private PasswordEncoder passwordEncoder;
 			Loan loan3 = new Loan("Automotriz",300000,List.of(6,12,24,36));
 			loanRepository.save(loan3);
 
-			ClientLoan clientLoan1 = new ClientLoan(400000,60,client1,loan1);
+			ClientLoan clientLoan1 = new ClientLoan(400000,60);
+			client1.addClientLoan(clientLoan1);
+			loan1.addClientLoan(clientLoan1);
 			clientLoanRepository.save(clientLoan1);
-			ClientLoan clientLoan2 = new ClientLoan(50000,12,client1,loan2);
+			ClientLoan clientLoan2 = new ClientLoan(50000,12);
 			clientLoanRepository.save(clientLoan2);
 
-			ClientLoan clientLoan3 = new ClientLoan(100000,24,client2,loan2);
+			ClientLoan clientLoan3 = new ClientLoan(100000,24);
 			clientLoanRepository.save(clientLoan3);
-			ClientLoan clientLoan4 = new ClientLoan(200000,36,client2,loan3);
+			ClientLoan clientLoan4 = new ClientLoan(200000,36);
 			clientLoanRepository.save(clientLoan4);
 
 

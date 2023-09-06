@@ -8,6 +8,8 @@ import com.MindHub.homebanking.models.Account;
 import com.MindHub.homebanking.models.Client;
 import com.MindHub.homebanking.repositories.AccountRepository;
 import com.MindHub.homebanking.repositories.ClientRepository;
+import com.MindHub.homebanking.services.AccountService;
+import com.MindHub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,19 +26,23 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class AccountController {
+//    @Autowired
+//    private AccountRepository accountRepository;
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @GetMapping("/accounts")
         public List<AccountDTO> getAccounts(){
-            return accountRepository.findAll().stream().map(AccountDTO::new).collect(Collectors.toList());
+            return accountService.getAccounts();
     }
+//    @Autowired
+//    public ClientRepository clientRepository;
     @Autowired
-    public ClientRepository clientRepository;
+    private ClientService clientService;
     @GetMapping("/accounts/{id}")
         public ResponseEntity<Object> getAccountById(@PathVariable Long id, Authentication authentication){
-        Client client = clientRepository.findByEmail(authentication.getName());
-        Account account = accountRepository.findById(id).orElse(null);
+        Client client = clientService.findByEmail(authentication.getName());
+        Account account = accountService.findById(id);
         if (account == null){
             return new ResponseEntity<>("Account no encontrada", HttpStatus.NOT_FOUND);
         }
@@ -49,13 +55,13 @@ public class AccountController {
     }
     @GetMapping("/clients/current/accounts")
     public List<AccountDTO> getCurrentAccount(Authentication authentication){
-             Client client = clientRepository.findByEmail(authentication.getName());
+             Client client = clientService.findByEmail(authentication.getName());
         return client.getAccounts().stream().map(AccountDTO::new).collect(Collectors.toList());
     }
     @PostMapping(path = "/clients/current/accounts")
     public ResponseEntity<Object> registerAccount(Authentication authentication) {
 
-        Client client = clientRepository.findByEmail(authentication.getName());
+        Client client = clientService.findByEmail(authentication.getName());
         if (client == null){
             return new ResponseEntity<>("Client NOT FOUND", HttpStatus.NOT_FOUND);
         }
@@ -65,13 +71,13 @@ public class AccountController {
             do{
                 randomNum =(long) ((Math.random() * (999999 - 1)) + 1);
                 numberAccounts = "VIN-"+randomNum;
-             }while (accountRepository.existsByNumber(numberAccounts));
+             }while (accountService.existsByNumber(numberAccounts));
 
             // Crea Aqui
             Account newAccount = new Account(numberAccounts, LocalDate.now(), 0);
-            accountRepository.save(newAccount);
+            accountService.save(newAccount);
             client.addAccount(newAccount);
-            clientRepository.save(client);
+            clientService.save(client);
             return new ResponseEntity<>("Account create", HttpStatus.CREATED);
 
             }else{

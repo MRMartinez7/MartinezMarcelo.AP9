@@ -3,6 +3,7 @@ package com.MindHub.homebanking.controllers;
 
 import com.MindHub.homebanking.dto.LoanDTO;
 import com.MindHub.homebanking.repositories.LoanRepository;
+import com.MindHub.homebanking.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,16 +17,17 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 public class LoanController {
     @Autowired
-    private LoanRepository loanRepository;
+    private LoanService loanService;
+//    private LoanRepository loanRepository;
 
 
     @GetMapping("/loans")
     public List<LoanDTO> getLoans(){
-        return loanRepository.findAll().stream().map(LoanDTO::new).collect(Collectors.toList());
+        return loanService.getLoans();
     }
     @RequestMapping("/loans/{id}")
     public LoanDTO getLoanById(@PathVariable Long id){
-        return new LoanDTO(loanRepository.findById(id).orElse(null));
+        return new LoanDTO(loanService.findById(id));
     }
 
 }

@@ -21,7 +21,10 @@ public class Loan {
 
     @OneToMany(mappedBy= "loan", fetch=FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
-
+    public void addClientLoan(ClientLoan clientLoan){
+        clientLoan.setLoan(this);
+        clientLoans.add(clientLoan);
+    }
 
     //construcctor
 
@@ -76,4 +79,5 @@ public class Loan {
     public void setClientLoans(Set<ClientLoan> clientLoans) {
         this.clientLoans = clientLoans;
     }
+
 }

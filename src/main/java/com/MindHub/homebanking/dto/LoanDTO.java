@@ -20,7 +20,6 @@ public class LoanDTO {
         name = loan.getName();
         maxAmount = loan.getMaxAmount();
         payments  = loan.getPayments();
-        loans = loan.getClientLoans().stream().map(ClientLoanDTO::new).collect(Collectors.toSet());
     }
 
     public Long getId() {
