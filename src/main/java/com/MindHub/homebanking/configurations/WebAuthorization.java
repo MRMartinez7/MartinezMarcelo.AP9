@@ -24,7 +24,7 @@ public class WebAuthorization  {
 
         http.authorizeRequests()
 
-                .antMatchers("/web/index.html" ).permitAll()
+                .antMatchers("/web/index.html","https://myhomebankingapp.onrender.com" ).permitAll()
                 .antMatchers("/web/css/**", "/web/js/**", "/web/img/**" ).permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients",
                                                            "/api/accounts",
