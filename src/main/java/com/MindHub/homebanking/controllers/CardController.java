@@ -8,6 +8,7 @@ import com.MindHub.homebanking.repositories.CardRepository;
 import com.MindHub.homebanking.repositories.ClientRepository;
 import com.MindHub.homebanking.services.CardService;
 import com.MindHub.homebanking.services.ClientService;
+import com.MindHub.homebanking.utilities.UtilityCards;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class CardController {
     public List<CardDTO> getCards(){
         return cardService.getCards();
     }
-    @RequestMapping("/cards/{id}")
+    @GetMapping("/cards/{id}")
     public CardDTO getCardsById(@PathVariable Long id){
         return new CardDTO(cardService.findById(id));
     }
@@ -71,12 +72,11 @@ public class CardController {
         }
             if((cardType.equals(CardType.CREDIT) && credit < 3 && !color) || (cardType.equals(CardType.DEBIT) && debit < 3 && !color))
 {
-
                 String numberNewCard;
                 int numCVV;
-                numCVV = Card.createCVV();
+                numCVV = UtilityCards.createCVV();
                 do {
-                    numberNewCard = Card.cardNumberCreate();
+                    numberNewCard = UtilityCards.cardNumberCreate();
                 }while (cardService.existsByNumber(numberNewCard));
 
                 Card newCard = new Card(client.getFirstName() +" "+ client.getLastName(), cardType, cardColor ,numberNewCard , numCVV ,LocalDate.now().plusYears(5),LocalDate.now());

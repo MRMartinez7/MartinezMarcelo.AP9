@@ -31,8 +31,8 @@ public class WebAuthorization  {
                                                            "/api/clients/current/accounts",
                                                            "/api/clients/current/cards",
                                                            "/api/login" ).permitAll()
-                .antMatchers(HttpMethod.POST, "/api/transactions","/api/loans").hasAnyAuthority("CLIENT", " ADMIN")
-                .antMatchers("/web/**", "/api/accounts/{id}", "/api/loans" ).hasAnyAuthority("CLIENT", " ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/transactions","/api/loans").hasAnyAuthority("CLIENT", "ADMIN")
+                .antMatchers("/web/**", "/api/accounts/{id}", "/api/loans" ).hasAnyAuthority("CLIENT", "ADMIN")
                 .antMatchers("/admin/**","/h2-console/**", "/rest/**" ).hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET,"/api/clients/current/**" ).hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers("/**" ).denyAll()

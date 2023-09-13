@@ -25,7 +25,7 @@ public class LoanController {
     public List<LoanDTO> getLoans(){
         return loanService.getLoans();
     }
-    @RequestMapping("/loans/{id}")
+    @GetMapping("/loans/{id}")
     public LoanDTO getLoanById(@PathVariable Long id){
         return new LoanDTO(loanService.findById(id));
     }

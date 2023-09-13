@@ -33,11 +33,11 @@ public class ClientController {
         return clientService.getCLients();
     }
 
-    @RequestMapping("/clients/{id}")
+    @GetMapping("/clients/{id}")
     public ClientDTO getClientById(@PathVariable Long id){
         return new ClientDTO(clientService.findById(id));
     }
-    @RequestMapping("/clients/current")
+    @GetMapping("/clients/current")
     public ClientDTO getCurrentClient(Authentication authentication){
         return new ClientDTO(clientService.findByEmail(authentication.getName()));
     }
@@ -59,7 +59,6 @@ public class ClientController {
             return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);        }
         Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password),RolType.CLIENT);
         clientService.save(newClient);
-
             String numberAccounts;
             long randomNum;
             do{
